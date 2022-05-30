@@ -1,0 +1,334 @@
+<!-- 
+Author: Guanyan Peng
+Create Date: 28/5/2022
+Upadte Date: 29/5/2022
+Project: Web UI for grasshopper
+ -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>福耀汽车玻璃印花填充工具</title>
+
+    <!-- Custom fonts for this template -->
+    <link href="assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Nunito|Arial|Helvetica:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+    rel="stylesheet">
+    <link href="assets/css/sb-admin-2.min.css" rel="stylesheet" type="text/css">
+    <link href="assets/css/mystyle.css" rel="stylesheet" type="text/css">
+
+</head>
+<body id="page-top">
+    <div id="wrapper" style="font-family: Microsoft YaHei;">
+        <div id="content-wrapper" class="d-flex flex-column">
+            <div id="content">
+                <!-- Topbar -->
+                <!-- 主导航 -->
+                <nav class="navbar navbar-expand navbar-light bg-primary topbar static-top shadow text-center">
+                    <div class="col-xl-12 col-lg-12 navbar-header">
+                        <span class="text-lg mr-4 d-lg-inline text-white font-weight-bold"><i class="fa-solid fa-spray-can"></i>&nbsp;福耀汽车玻璃印花填充工具</span>
+                    </div>
+                </nav>
+                <!-- 第一个子页面：填充区域选择 -->
+                <div id="fillAreaChooseDiv">
+                    <div class="row">
+                        <div class="col-xl-12 col-lg-12">
+                            <!-- Fill in categories -->
+                            <div class="card shadow">
+                                <div class="card-header py-3">
+                                    <h6 class="m-0 font-weight-bold text-dark">填充类型</h6>
+                                </div>
+                                <div class="card-body">
+                                    <div class="col-lg-12 mb-2">
+                                        <!-- Radio groups -->
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="fillRadio" id="holeRadio" value="1" checked/>
+                                            <label class="form-check-label" for="fillRadio"> 孔状区域 </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="fillRadio" id="stripeRadio" value="2"/>
+                                            <label class="form-check-label" for="fillRadio"> 带状区域 </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="fillRadio" id="blockRadio" value="3"/>
+                                            <label class="form-check-label" for="fillRadio"> 块状区域 </label>
+                                        </div>
+                                    </div>
+                                    <div class="float-right">
+                                        <a id="startFillBtn" href="javascript:void(0)" rel="nofollow ugc" class="btn btn-primary btn-icon-split btn-sm">
+                                            <span class="icon text-white-50">
+                                                <i class="fa-solid fa-paint-roller"></i>
+                                            </span>
+                                            <span class="text">开始填充</span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xl-12 col-lg-12">
+                            <!-- Fill in categories -->
+                            <div class="card shadow">
+                                <div class="card-header py-3">
+                                    <h6 class="m-0 font-weight-bold text-dark">已填充区域</h6>
+                                </div>
+                                <div class="card-body">
+                                    <div id="fillCompleteList" class="col-lg-12 mb-2">
+                                        <!-- Radio groups -->
+                                        <!-- 最好不是一个列表，是一个表格 -->
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="filledRadio" id="holeRadio"/>
+                                            <label class="form-check-label" for="filledRadio"> 孔状区域1 </label>
+                                        </div>
+                                        <!-- <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="fillRadio" id="stripeRadio"/>
+                                            <label class="form-check-label" for="fillRadio"> 带状区域 </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="fillRadio" id="blockRadio"/>
+                                            <label class="form-check-label" for="fillRadio"> 块状区域 </label>
+                                        </div> -->
+                                    </div>
+                                    <div class="float-right">
+                                        <a id="editFillBtn" href="javascript:void(0)" rel="nofollow ugc" class="btn btn-success btn-icon-split btn-sm">
+                                            <span class="icon text-white-50">
+                                                <i class="fas fa-edit"></i>
+                                            </span>
+                                            <span class="text">编辑填充</span>
+                                        </a>
+                                        <a id="delFillBtn" href="javascript:void(0)" rel="nofollow ugc" class="btn btn-danger btn-icon-split btn-sm">
+                                            <span class="icon text-white-50">
+                                                <i class="fas fa-times"></i>
+                                            </span>
+                                            <span class="text">删除填充</span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- <button id="test">test</button> -->
+                    <div id="fillAreaChooseInputs" class="row m-2 d-none">
+                        <input type="number" id="fillBtnClick" name="fillBtnClick" value="0" placeholder="slot for fill button click" disabled>
+                        <input type="number" id="editBtnClick" name="editBtnClick" value="0" placeholder="slot for edit button click" disabled>
+                        <input type="number" id="delBtnClick" name="delBtnClick" value="0" placeholder="slot for del button click" disabled>
+                    </div>
+                </div>
+                <!-- 第一个子页面结束 -->
+
+                <!-- 第二个子页面：不同形状的区域填充 -->
+                <div id="fillAreaDiv" class="d-none">
+                    <div class="row">
+                        <div class="col-xl-12 col-lg-12">
+                            <!-- Fill in categories -->
+                            <div class="card shadow">
+                                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                                    <ul class="nav nav-tabs card-header-tabs">
+                                        <li class="nav-item">
+                                            <a id="fillHoleLink" class="nav-link active" href="javascript:void(0)" rel="nofollow ugc">孔状区域</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a id="fillStripeLink" class="nav-link disabled" href="javascript:void(0)" rel="nofollow ugc">带状区域</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a id="fillBlockLink" class="nav-link disabled" href="javascript:void(0)" rel="nofollow ugc">块状区域</a>
+                                        </li>
+                                    </ul>
+                                    <div class="no-arrow">
+                                        <a id="fromHole2homeBtn" href="javascript:void(0)" rel="nofollow ugc" class="btn btn-primary btn-sm">返回</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="fillHoleAreaTab" class="card-group d-flex">
+                                <div class="card col-3">
+                                    <div class="card-body">
+                                        <h6 class="card-title"><strong>填充说明</strong></h6>
+                                        <p class="card-text">关于孔状区域填充的步骤说明：</p>
+                                    </div>
+                                </div>
+                                <div class="card col-9">
+                                    <div class="card-body">
+                                        <h6 class="card-title"><strong>几何轮廓拾取</strong></h6>
+                                        <div class="form-group row">
+                                            <div class="col-sm-2"></div>
+                                            <div class="col-sm-10">
+                                                <div class="form-row align-items-center">
+                                                    <div class="col">
+                                                        <button id="chooseOuterEdgeForHABtn" class="btn btn-primary btn-block btn-sm">选取外边界曲线</button>
+                                                    </div>
+                                                    <div class="col">
+                                                        <img id="checkerForHoleOuterLine" class="img-profile rounded-circle d-none" src="assets/img/check.png">
+                                                    </div>
+                                                </div>
+                                                <div class="form-row align-items-center">
+                                                    <div class="col">
+                                                        <button id="chooseInnerEdgeForHABtn" class="btn btn-primary btn-block btn-sm">选取内边界曲线</button>
+                                                    </div>
+                                                    <div class="col">
+                                                        <img id="checkerForHoleInnerLine" class="img-profile rounded-circle d-none" src="assets/img/check.png">
+                                                    </div>
+                                                </div>
+                                                <div class="form-row align-items-center">
+                                                    <div class="col">
+                                                        <button id="chooseRefEdgeForHABtn" class="btn btn-primary btn-block btn-sm">选取参考曲线</button>
+                                                    </div>
+                                                    <div class="col">
+                                                        <img id="checkerForHoleRefLine" class="img-profile rounded-circle d-none" src="assets/img/check.png">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div id="chooseEdgesforHInputs" class="row m-2 d-none">
+                                                <input type="number" id="holeOuterClick" name="holeOuterClick" value="0" placeholder="slot for choose outer button click">
+                                                <input type="number" id="holeInnerClick" name="holeInnerClick" value="0" placeholder="slot for choose inner button click">
+                                                <input type="number" id="holeRefClick" name="holeRefClick" value="0" placeholder="slot for del choose ref click">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card-footer">
+                                        <h6 class="card-title"><strong>花点参数设置（单位：mm）</strong></h6>
+                                        <form>
+                                            <fieldset class="form-group">
+                                                <div class="row">
+                                                    <legend class="col-form-label col-sm-2 pt-0">带状图案</legend>
+                                                    <div class="col-sm-10">
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="radio" name="holeUnitChoose" id="holeUnitChooseRadio1" value="1" checked>
+                                                            <label class="form-check-label" for="holeUnitRadio1">圆形</label>
+                                                        </div>
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="radio" name="holeUnitChoose" id="holeUnitChooseRadio2" value="2">
+                                                            <label class="form-check-label" for="holeUnitRadio2">圆角矩形</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </fieldset>
+                                            <div class="form-group row">
+                                                <label for="holeRadius" class="col-sm-2 col-form-label">带状半径</label>
+                                                <div class="col-sm-10">
+                                                    <textarea class="form-control" id="holeRadius" aria-describedby="holeRadiusInputHelp" rows="2"></textarea>
+                                                    <small id="holeRadiusInputHelp" class="form-text text-muted">注：多个半径请以空格隔开输入，如：0.425 0.6 0.85</small>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label for="holeHeights" class="col-sm-2 col-form-label">带状高度</label>
+                                                <div class="col-sm-10">
+                                                    <textarea class="form-control" id="holeHeights" aria-describedby="holeHeightsInputHelp" rows="2"></textarea>
+                                                    <small id="holeHeightsInputHelp" class="form-text text-muted">注：多个高度请以空格隔开输入，如：1.4 1.7</small>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label for="holeWidth" class="col-sm-2 col-form-label">带状宽度</label>
+                                                <div class="col-sm-10">
+                                                    <input type="text" class="form-control" id="holeWidth" placeholder="单行输入">
+                                                </div>
+                                            </div>
+                                            <fieldset class="form-group">
+                                                <div class="row">
+                                                    <legend class="col-form-label col-sm-2 pt-0">块状图案</legend>
+                                                    <div class="col-sm-10">
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="radio" name="holeUnitChoose2" id="holeUnitChoose2Radio1" value="1" checked>
+                                                            <label class="form-check-label" for="holeUnitRadio1">圆形</label>
+                                                        </div>
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="radio" name="holeUnitChoose2" id="holeUnitChoose2Radio2" value="2">
+                                                            <label class="form-check-label" for="holeUnitRadio2">圆角矩形</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </fieldset>
+                                            
+                                            <div class="form-group row">
+                                                <label for="holeHorizontalRadius" class="col-sm-2 col-form-label">水平半径</label>
+                                                <div class="col-sm-10">
+                                                    <input type="text" class="form-control" id="holeHorizontalRadius" placeholder="单行输入">
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label for="holeHorizontalHeight" class="col-sm-2 col-form-label">水平高度</label>
+                                                <div class="col-sm-10">
+                                                    <input type="text" class="form-control" id="holeHorizontalHeight" placeholder="单行输入">
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label for="holeHorizontalWidth" class="col-sm-2 col-form-label">水平宽度</label>
+                                                <div class="col-sm-10">
+                                                    <input type="text" class="form-control" id="holeHorizontalWidth" placeholder="单行输入">
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label for="process" class="col-sm-2 col-form-label">网格预处理</label>
+                                                <div class="col-sm-10 float-right d-flex">
+                                                    <div class="btn-group col-12">
+                                                        <button id="holeMeshGenerateBtn" type="button" class="btn btn-block-sm btn-secondary btn-sm">生成并保存网格</button>
+                                                        <button id="holeMeshProcessBtn" type="button" class="btn btn-block-sm btn-primary btn-sm">运行InstantMeshes</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <hr/>
+                                            <div class="form-group row">
+                                                <div class="col-sm-2"></div>
+                                                <div class="col-sm-10 d-flex">
+                                                    <div class="col-4"></div>
+                                                    <div class="col-4 float-right ">
+                                                        <button id="holePreviewBtn" type="button" class="btn btn-block btn-secondary btn-sm">预览</button>
+                                                    </div>
+                                                    <div class="col-4 float-right ">
+                                                        <button id="holeGenerateBtn" type="button" class="btn btn-block btn-primary btn-sm">生成</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="fillStripeAreaTab" class="card-group d-none">
+                                <div class="card col-3">
+                                    <div class="card-body">
+                                        <h6 class="card-title"><strong>填充说明</strong></h6>
+                                        <p class="card-text">关于带状区域填充的步骤说明：</p>
+                                    </div>
+                                </div>
+                                <div class="card col-9">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Card title</h5>
+                                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="fillBlockAreaTab" class="card-group d-none">
+                                <div class="card col-3">
+                                    <div class="card-body">
+                                        <h6 class="card-title"><strong>填充说明</strong></h6>
+                                        <p class="card-text">关于块状区域填充的步骤说明：</p>
+                                    </div>
+                                </div>
+                                <div class="card col-9">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Card title</h5>
+                                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap core JavaScript-->
+    <script src="assets/vendor/jquery/jquery.min.js"></script>
+    <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- Core plugin JavaScript-->
+    <script src="assets/vendor/jquery-easing/jquery.easing.min.js"></script>
+    <!-- Custom scripts for all pages-->
+    <script src="assets/js/sb-admin-2.min.js"></script>
+    <!-- Page Level custom script-->
+    <script src="assets/js/forIndex.js"></script>
+</body>
+</html>
